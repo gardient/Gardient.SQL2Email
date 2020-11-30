@@ -1,6 +1,5 @@
 ﻿using Serilog;
-using Serilog.Events;
-using Serilog.Sinks.SystemConsole.Themes;
+using System;
 
 namespace Gardient.SQL2Email
 {
@@ -8,9 +7,8 @@ namespace Gardient.SQL2Email
     {
         static void Main(string[] args)
         {
+            Serilog.Debugging.SelfLog.Enable(Console.Out);
             Log.Logger = new LoggerConfiguration()
-                .WriteTo.EventLog("Application", restrictedToMinimumLevel: LogEventLevel.Information)
-                .WriteTo.Console(theme: SystemConsoleTheme.Colored)
                 .ReadFrom.AppSettings()
                 .CreateLogger();
 
